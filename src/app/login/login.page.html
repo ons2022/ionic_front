@@ -4,18 +4,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <form (ngSubmit)="login()">
-    <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input [(ngModel)]="credentials.username" name="username"></ion-input>
-    </ion-item>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Username</ion-label>
+    <ion-input [(ngModel)]="username" type="text" required></ion-input>
+  </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input [(ngModel)]="credentials.password" name="password" type="password"></ion-input>
-    </ion-item>
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input [(ngModel)]="password" type="password" required></ion-input>
+  </ion-item>
 
-    <ion-button expand="block" type="submit">Login</ion-button>
-  </form>
+  <ion-button expand="full" (click)="login()">Login</ion-button>
+
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <ion-button expand="full" routerLink="/register">Don't have an account? Register</ion-button>
 </ion-content>

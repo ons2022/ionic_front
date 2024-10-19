@@ -1,27 +1,29 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+ion-header {
+  --background: #f8b400; /* Custom color for toolbar */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-content {
+  --background: #fff;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+ion-card {
+  margin-bottom: 16px;
 }
 
-#container a {
-  text-decoration: none;
+ion-card-title {
+  font-size: 1.4rem;
+}
+
+ion-img {
+  max-height: 100px;
+  object-fit: cover;
+}
+
+ion-fab-button {
+  --background: #f53d3d; /* Red floating button for cart */
+}
+
+ion-button {
+  --background: #28a745; /* Add to Cart button */
+  --border-radius: 12px;
 }

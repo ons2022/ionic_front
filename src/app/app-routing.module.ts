@@ -11,13 +11,27 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
-  {
-    path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
-  },
+ 
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+  },
+ 
+  {
+    path: 'food-list',
+    loadChildren: () => import('./food-list/food-list.module').then( m => m.FoodListPageModule)
+  },
+  {
+    path: 'add-food',
+    loadChildren: () => import('./add-food/add-food.module').then( m => m.AddFoodPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
 ];
 

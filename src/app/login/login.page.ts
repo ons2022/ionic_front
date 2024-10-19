@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,23 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-  credentials = {
-    username: '',
-    password: ''
-  };
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    this.http.post('http://localhost:8000/login/', this.credentials)
-      .subscribe(
-        (response: any) => {
-          console.log('Login successful', response);
-          this.router.navigate(['/home']);
-        },
-        (error) => {
-          console.error('Login failed', error);
-        }
-      );
+    this.authService.login({ username: this.username, password: this.password }).subscribe(
+      (response) => {
+        this.router.navigate(['/home']);  // Navigate to home page after successful login
+      },
+      (error) => {
+        this.errorMessage = 'Invalid credentials. Please try again.';
+      }
+    );
   }
 }
