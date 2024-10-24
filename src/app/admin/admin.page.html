@@ -5,14 +5,32 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+
   <!-- Form to Add or Edit Food -->
   <ion-item>
     <ion-label position="floating">Food Name</ion-label>
     <ion-input [(ngModel)]="newFood.name"></ion-input>
   </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-textarea [(ngModel)]="newFood.description"></ion-textarea>
+  </ion-item>
+
   <ion-item>
     <ion-label position="floating">Price</ion-label>
     <ion-input [(ngModel)]="newFood.price" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Available</ion-label>
+    <ion-toggle [(ngModel)]="newFood.available"></ion-toggle>
+  </ion-item>
+
+  <!-- Image Upload -->
+  <ion-item>
+    <ion-label position="stacked">Image</ion-label>
+    <input type="file" (change)="onFileSelected($event)">
   </ion-item>
 
   <ion-button expand="full" *ngIf="!editMode" (click)="addFood()">Add Food</ion-button>
