@@ -42,8 +42,8 @@
     <input type="file" (change)="onFileSelected($event)">
   </ion-item>
 
-  <ion-button expand="full" *ngIf="!editMode" (click)="addFood()">Add Food</ion-button>
-  <ion-button expand="full" *ngIf="editMode" (click)="updateFood()">Update Food</ion-button>
+  <ion-button color="tertiary" expand="full" *ngIf="!editMode" (click)="addFood()">Add Food</ion-button>
+  <ion-button color="tertiary" expand="full" *ngIf="editMode" (click)="updateFood()">Update Food</ion-button>
 
   <hr>
 
