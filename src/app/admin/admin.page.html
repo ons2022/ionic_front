@@ -11,6 +11,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content class="ion-padding">
 
   <!-- Form to Add or Edit Food -->
@@ -29,8 +30,9 @@
     <ion-input [(ngModel)]="newFood.price" type="number"></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Available</ion-label>
+  <!-- "Available" Toggle with Updated Class -->
+  <ion-item class="available-toggle">
+    <ion-label>Available</ion-label>
     <ion-toggle [(ngModel)]="newFood.available"></ion-toggle>
   </ion-item>
 

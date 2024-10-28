@@ -1,0 +1,95 @@
+ion-header {
+    --background: #ffc107; /* Tertiary color background */
+    color: #fff; /* Text color for toolbar */
+  }
+  
+  ion-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  ion-content {
+    --background: #f4f5f8; /* Light background for content */
+  }
+  
+  ion-item {
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for items */
+  }
+  
+  ion-label {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  ion-input,
+  ion-textarea {
+    color: #333; /* Text color for inputs */
+  }
+  
+  /* Styling for Available Toggle */
+  ion-item.available-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1rem; /* Adjusts the right padding */
+  }
+  
+  .available-toggle ion-label {
+    margin-right: auto; /* Pushes the label to the left */
+  }
+  
+  .available-toggle ion-toggle {
+    margin-left: auto; /* Aligns the toggle to the far right */
+  }
+  
+  ion-toggle {
+    --handle-background: #ffc107; /* Toggle button color */
+  }
+  
+  input[type='file'] {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  ion-button {
+    --border-radius: 20px;
+    --background: #28a745; /* Add Food button color */
+    --color: #fff; /* Text color */
+  }
+  
+  ion-button[color='danger'] {
+    --background: #dc3545; /* Delete button color */
+  }
+  
+  ion-button[color='primary'] {
+    --background: #007bff; /* Edit button color */
+  }
+  
+  hr {
+    border: 1px solid #ccc;
+    margin: 1.5rem 0;
+  }
+  
+  ion-list {
+    padding: 0 1rem;
+  }
+  
+  ion-item ion-label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  /* Media Query for Mobile Responsiveness */
+  @media (max-width: 600px) {
+    ion-title {
+      font-size: 1.2rem;
+    }
+  
+    ion-button {
+      font-size: 0.9rem;
+    }
+  }
+  
