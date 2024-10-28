@@ -1,23 +1,35 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label position="floating">Username</ion-label>
-    <ion-input [(ngModel)]="username" type="text" required></ion-input>
-  </ion-item>
+  <div class="header-image">
+    <ion-img src="assets/img/im2.png"></ion-img>
+  </div> 
+  <div class="login-form">
+    <ion-item class="styled-input">
+      <ion-label position="floating">Username</ion-label>
+      <ion-input [(ngModel)]="username" type="text" required></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Password</ion-label>
-    <ion-input [(ngModel)]="password" type="password" required></ion-input>
-  </ion-item>
+    <ion-item class="styled-input">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input [(ngModel)]="password" type="password" required></ion-input>
+    </ion-item>
 
-  <ion-button expand="full" (click)="login()">Login</ion-button>
+    <ion-button expand="full" (click)="login()" color="tertiary" class="login-button">
+      <ion-icon name="log-in-outline" slot="start"></ion-icon>
+      Login
+    </ion-button>
 
-  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-  <ion-button expand="full" routerLink="/register">Don't have an account? Register</ion-button>
+    <ion-button expand="full" color="tertiary" routerLink="/register">
+      <ion-icon name="person-add-outline" slot="start"></ion-icon>
+      Don't have an account? Register
+    </ion-button>
+    
+  </div>
 </ion-content>

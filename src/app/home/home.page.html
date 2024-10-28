@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>Food Delivery</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button> <!-- Side menu button -->
@@ -20,8 +20,8 @@
   <ion-grid>
     <ion-row>
       <ion-col size="4" *ngFor="let category of categories">
-        <ion-card>
-          <ion-img [src]="category.image"></ion-img>
+        <ion-card class="category-card">
+          <ion-img [src]="category.image" class="category-img"></ion-img>
           <ion-card-content>
             <ion-label>{{ category.name }}</ion-label>
           </ion-card-content>
@@ -59,7 +59,7 @@
 
   <!-- Floating Cart Button -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="openCart()">
-    <ion-fab-button>
+    <ion-fab-button color="tertiary">
       <ion-icon name="cart"></ion-icon>
     </ion-fab-button>
   </ion-fab>

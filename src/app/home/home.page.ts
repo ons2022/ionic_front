@@ -15,7 +15,7 @@ export class HomePage implements OnInit {
   // Example categories (static data)
   categories = [
     { name: 'Pizza', image: 'assets/img/pizza.jpg' },
-    { name: 'Burgers', image: 'assets/img/burger.jpg' },
+    { name: 'Burger', image: 'assets/img/burger.jpg' },
     { name: 'Sushi', image: 'assets/img/sushi.jpg' }
   ];
 

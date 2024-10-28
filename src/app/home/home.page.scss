@@ -1,29 +1,110 @@
-ion-header {
-  --background: #f8b400; /* Custom color for toolbar */
-}
-
+/* Overall Background */
 ion-content {
-  --background: #fff;
+  --background: #f0f4f8; /* Light background */
 }
 
-ion-card {
-  margin-bottom: 16px;
+/* Toolbar Styling */
+ion-toolbar {
+  --background: #007bff; /* Toolbar background color */
+  --color: #ffffff; /* Text color */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+ion-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Search Bar Styling */
+ion-searchbar {
+  --background: #ffffff;
+  --border-radius: 10px;
+  width: 100%; /* Makes the search bar fit the screen width */
+  margin: 10px 0; /* Space above and below */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Category Card Styling */
+.category-card {
+  height: 180px; /* Slightly increased height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+.category-img {
+  height: 120px; /* Slightly increased image height */
+  width: 100%; /* Ensures full width within the card */
+  object-fit: cover; /* Ensures the image fills the space while preserving aspect ratio */
+  border-radius: 10px;
+}
+
+/* Category Label Styling */
+.category-card ion-card-content ion-label {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Food List Card Styling */
 ion-card-title {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
 }
 
-ion-img {
-  max-height: 100px;
+ion-card-content ion-label {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Thumbnail Image Styling */
+ion-thumbnail ion-img {
+  border-radius: 10px; /* Rounded corners for food images */
   object-fit: cover;
 }
 
-ion-fab-button {
-  --background: #f53d3d; /* Red floating button for cart */
+/* Button Styling */
+ion-button {
+  --background: #007bff;
+  --border-radius: 10px;
+  --color: #ffffff;
 }
 
-ion-button {
-  --background: #28a745; /* Add to Cart button */
-  --border-radius: 12px;
+ion-button[fill="outline"] {
+  --border-color: #007bff;
+  --color: #007bff;
+}
+
+/* Floating Cart Button Styling */
+ion-fab-button {
+  --background: #007bff;
+  color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Floating shadow for cart button */
+}
+
+ion-fab-button ion-icon {
+  font-size: 1.4rem;
+}
+
+/* Logout Button Icon */
+ion-buttons ion-button ion-icon {
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+/* Style for No Food Message */
+ion-item[ng-reflect-ng-if="true"] {
+  text-align: center;
+  color: #666;
+}
+
+/* Grid Padding */
+ion-grid {
+  padding: 10px;
 }
