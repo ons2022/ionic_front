@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Storage } from '@ionic/storage-angular';  // For local storage of tokens
+import { Storage } from '@ionic/storage-angular';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';  // For side-effects and error handling
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://127.0.0.1:8000/api';  // Django backend URL
+  private baseUrl = 'http://127.0.0.1:8000/api'; // Django backend URL
   private _storage: Storage | null = null;
   token: string = '';
-  private cart: any[] = [];
+  private cart: any[] = []; // Cart array
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.init();
@@ -21,21 +21,22 @@ export class AuthService {
   async init() {
     const storage = await this.storage.create();
     this._storage = storage;
-    this.cart = (await this._storage.get('cart')) || [];
+    this.cart = (await this._storage.get('cart')) || []; // Load existing cart from storage
     const storedToken = await this._storage.get('access_token');
     if (storedToken) {
-      this.token = storedToken;  // Load the token if it exists in storage
+      this.token = storedToken; // Load the token if it exists in storage
     }
   }
+
   // Retrieve token from Ionic Storage
-async getToken() {
-  return await this.storage.get('access_token');
-}
+  async getToken() {
+    return await this.storage.get('access_token');
+  }
 
   // Register user
   register(credentials: { username: string; password: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/register/`, credentials).pipe(
-      catchError(this.handleError)  // Handle any errors that occur
+      catchError(this.handleError)
     );
   }
 
@@ -45,56 +46,71 @@ async getToken() {
       tap(async (res: any) => {
         this.token = res.access;
         await this._storage?.set('access_token', this.token);
-        await this._storage?.set('user_role', res.role);  // Store the user's role (admin/user)
+        await this._storage?.set('user_role', res.role);
       })
     );
   }
-  
+
   // Retrieve the user role from storage
   async getUserRole() {
     return await this.storage.get('user_role');
   }
 
-  // Add food to cart
-  addToCart(foodId: number, quantity: number): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`
-    });
-    return this.http.post(`${this.baseUrl}/cart/add/`, { food_id: foodId, quantity }, { headers }).pipe(
-      catchError(this.handleError)
-    );
-  }
-  getCartItems() {
-    return this.cart;  // You can also retrieve from Ionic Storage if needed
+  // Add food item to the cart
+  async addToCart(food: { id: number; name: string; price: number; image: string }, quantity: number = 1) {
+    const existingItem = this.cart.find(item => item.id === food.id);
+    if (existingItem) {
+      existingItem.quantity += quantity; // Update quantity if item already in cart
+    } else {
+      this.cart.push({ ...food, quantity }); // Add new item to cart
+    }
+    await this._storage?.set('cart', this.cart); // Save updated cart to storage
   }
 
-  // Optionally, clear the cart after checkout
-  clearCart() {
+  // Get all items in the cart
+  async getCartItems() {
+    this.cart = await this._storage?.get('cart') || [];
+    return this.cart;
+  }
+
+  // Remove an item from the cart
+  async removeFromCart(foodId: number) {
+    this.cart = this.cart.filter(item => item.id !== foodId); // Filter out the item by ID
+    await this._storage?.set('cart', this.cart); // Update cart in storage
+  }
+
+  // Clear the cart after checkout or logout
+  async clearCart() {
     this.cart = [];
-    this.storage.remove('cart');
+    await this._storage?.remove('cart'); // Remove cart from storage
   }
 
-  // Get food list
+  // Calculate total price of items in the cart
+  calculateTotalPrice(): number {
+    return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  }
+
+  // Get food list (with token authorization)
   getFoodList(): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`  // Send the token in the Authorization header
+      Authorization: `Bearer ${this.token}`
     });
     return this.http.get(`${this.baseUrl}/foods/`, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  // Admin: Add new food (Now expects FormData)
+  // Admin: Add new food (FormData format for image upload)
   addNewFood(food: FormData): Observable<any> {
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`  // Send the token in the Authorization header
+      Authorization: `Bearer ${this.token}`
     });
     return this.http.post(`${this.baseUrl}/foods/`, food, { headers }).pipe(
       catchError(this.handleError)
     );
   }
 
-  // Admin: Edit existing food (Now expects FormData)
+  // Admin: Edit existing food
   updateFood(foodId: number, food: FormData): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.token}`
@@ -114,10 +130,11 @@ async getToken() {
     );
   }
 
-  // Logout function to clear token
-  logout() {
-    this.token = '';  // Clear token in memory
-    this._storage?.remove('access_token');  // Remove token from storage
+  // Logout function to clear token and cart
+  async logout() {
+    this.token = '';
+    await this._storage?.remove('access_token');
+    await this.clearCart(); // Clear the cart on logout
   }
 
   // Centralized error handling
