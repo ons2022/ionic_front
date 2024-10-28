@@ -46,6 +46,7 @@ export class HomePage implements OnInit {
     }
     return this.foodList;
   }
+  
 
   // Add food to cart
   addToCart(food: any) {

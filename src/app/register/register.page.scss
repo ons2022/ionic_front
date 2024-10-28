@@ -1,0 +1,54 @@
+ion-content {
+  --background: #f0f4f8;
+}
+
+.header-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.header-image ion-img {
+  width: 180px;
+  height: 160px;
+  border-radius: 10%; // Rend l'image circulaire
+  object-fit: cover; // Assure le recadrage pour garder le cercle
+  border: 4px solid #fff; // Bordure blanche autour de l'image
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Ombre subtile pour un effet élégant
+}
+
+.register-form {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.styled-input {
+  margin-bottom: 15px;
+  --background: #f9f9f9;
+  --border-radius: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.checkbox-item ion-label {
+  font-size: 1rem;
+}
+
+.error-message {
+  color: #e74c3c;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+ion-button {
+  margin-top: 20px;
+}

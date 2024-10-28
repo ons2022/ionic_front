@@ -1,31 +1,46 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <!-- Username Input -->
-  <ion-item>
-    <ion-label position="floating">Username</ion-label>
-    <ion-input [(ngModel)]="username" required></ion-input>
-  </ion-item>
 
-  <!-- Password Input -->
-  <ion-item>
-    <ion-label position="floating">Password</ion-label>
-    <ion-input type="password" [(ngModel)]="password" required></ion-input>
-  </ion-item>
+  <!-- Image en haut -->
+  <div class="header-image">
+    <ion-img src="assets/img/im2.png"></ion-img>
+  </div>
 
-  <!-- Admin Checkbox -->
-  <ion-item>
-    <ion-label>Admin</ion-label>
-    <ion-checkbox [(ngModel)]="isAdmin"></ion-checkbox>
-  </ion-item>
+  <!-- Formulaire d'inscription -->
+  <div class="register-form">
+    <!-- Nom d'utilisateur avec icône -->
+    <ion-item class="styled-input">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Nom d'utilisateur</ion-label>
+      <ion-input [(ngModel)]="username" required></ion-input>
+    </ion-item>
 
-  <!-- Error Message Display -->
-  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    <!-- Mot de passe avec icône -->
+    <ion-item class="styled-input">
+      <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input type="password" [(ngModel)]="password" required></ion-input>
+    </ion-item>
 
-  <!-- Register Button -->
-  <ion-button expand="full" (click)="register()">Register</ion-button>
+    <!-- Checkbox Admin avec style personnalisé -->
+    <ion-item lines="none" class="checkbox-item">
+      <ion-label>Compte Administrateur</ion-label>
+      <ion-checkbox [(ngModel)]="isAdmin" color="secondary"></ion-checkbox>
+    </ion-item>
+
+    <!-- Message d'erreur -->
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+    <!-- Bouton d'inscription stylisé -->
+    <ion-button expand="block" (click)="register()" color="tertiary" shape="round">
+      <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+      S'inscrire
+    </ion-button>
+  </div>
+
 </ion-content>

@@ -11,6 +11,7 @@ export class AuthService {
   private baseUrl = 'http://127.0.0.1:8000/api';  // Django backend URL
   private _storage: Storage | null = null;
   token: string = '';
+  private cart: any[] = [];
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.init();
@@ -20,6 +21,7 @@ export class AuthService {
   async init() {
     const storage = await this.storage.create();
     this._storage = storage;
+    this.cart = (await this._storage.get('cart')) || [];
     const storedToken = await this._storage.get('access_token');
     if (storedToken) {
       this.token = storedToken;  // Load the token if it exists in storage
@@ -61,6 +63,15 @@ async getToken() {
     return this.http.post(`${this.baseUrl}/cart/add/`, { food_id: foodId, quantity }, { headers }).pipe(
       catchError(this.handleError)
     );
+  }
+  getCartItems() {
+    return this.cart;  // You can also retrieve from Ionic Storage if needed
+  }
+
+  // Optionally, clear the cart after checkout
+  clearCart() {
+    this.cart = [];
+    this.storage.remove('cart');
   }
 
   // Get food list
