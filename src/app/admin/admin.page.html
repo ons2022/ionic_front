@@ -1,9 +1,16 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Admin Dashboard</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-title>Food Delivery</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button> <!-- Side menu button -->
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()"> <!-- Logout button -->
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="ion-padding">
 
   <!-- Form to Add or Edit Food -->
