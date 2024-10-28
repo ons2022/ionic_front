@@ -1,7 +1,13 @@
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-title>Register</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/login"> 
+        <ion-icon slot="icon-only" name="log-in"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
+ 
 </ion-header>
 
 <ion-content class="ion-padding">
@@ -16,14 +22,14 @@
     <!-- Nom d'utilisateur avec icône -->
     <ion-item class="styled-input">
       <ion-icon name="person-outline" slot="start"></ion-icon>
-      <ion-label position="floating">Nom d'utilisateur</ion-label>
+      <ion-label position="floating">Username</ion-label>
       <ion-input [(ngModel)]="username" required></ion-input>
     </ion-item>
 
     <!-- Mot de passe avec icône -->
     <ion-item class="styled-input">
       <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-label position="floating">password</ion-label>
       <ion-input type="password" [(ngModel)]="password" required></ion-input>
     </ion-item>
 

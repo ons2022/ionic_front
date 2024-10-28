@@ -51,4 +51,9 @@ ion-content {
 
 ion-button {
   margin-top: 20px;
+
+}
+ion-buttons ion-button {
+  --background: transparent; /* Make the background transparent */
+  --color: #ffffff; /* Set text color to white */
 }
