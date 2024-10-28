@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>My Cart</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismissCart()">
@@ -11,8 +11,8 @@
 
 <ion-content>
   <!-- List of Items in the Cart -->
-  <ion-list *ngIf="cartItems.length > 0">
-    <ion-item *ngFor="let item of cartItems">
+  <ion-list *ngIf="cartItems.length > 0" class="cart-list">
+    <ion-item *ngFor="let item of cartItems" class="cart-item">
       <ion-thumbnail slot="start">
         <ion-img [src]="item.image"></ion-img>
       </ion-thumbnail>
@@ -24,7 +24,7 @@
   </ion-list>
 
   <!-- Total Price -->
-  <ion-item>
+  <ion-item class="total-price">
     <ion-label>
       <h2>Total Price:</h2>
     </ion-label>
@@ -34,10 +34,10 @@
   </ion-item>
 
   <!-- Empty Cart Message -->
-  <ion-item *ngIf="cartItems.length === 0">
+  <ion-item *ngIf="cartItems.length === 0" class="empty-cart">
     <ion-label>Your cart is empty.</ion-label>
   </ion-item>
 
   <!-- Checkout Button -->
-  <ion-button expand="full" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</ion-button>
+  <ion-button expand="full" class="checkout-button" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</ion-button>
 </ion-content>

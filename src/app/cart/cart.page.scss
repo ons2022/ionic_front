@@ -1,0 +1,76 @@
+/* Header Styling */
+ion-header {
+    --background: #ffc107; /* Tertiary color background */
+    color: #fff; /* Text color for toolbar */
+  }
+  
+  /* Title Styling */
+  ion-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  /* Overall Content Background */
+  ion-content {
+    --background: #f4f5f8; /* Light background for content */
+  }
+  
+  /* Cart List Styling */
+  .cart-list {
+    padding: 0 1rem; /* Padding for the list */
+  }
+  
+  /* Cart Item Styling */
+  .cart-item {
+    margin-bottom: 1rem; /* Space between items */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #ffffff; /* White background for items */
+  }
+  
+  /* Cart Item Title and Price Styling */
+  .cart-item h2 {
+    font-size: 1rem; /* Item name font size */
+    color: #333; /* Item name color */
+    font-weight: bold; /* Bold font for item name */
+  }
+  
+  .cart-item p {
+    color: #666; /* Price color */
+  }
+  
+  /* Total Price Styling */
+  .total-price {
+    padding: 10px; /* Padding for better spacing */
+    background-color: #ffffff; /* White background for total price */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  /* Empty Cart Message Styling */
+  .empty-cart {
+    text-align: center; /* Centered text */
+    color: #999; /* Grey color for empty cart message */
+    margin-top: 20px; /* Space above the message */
+  }
+  
+  /* Checkout Button Styling */
+  .checkout-button {
+    margin: 20px; /* Margin around the button */
+    --background: #28a745; /* Add Food button color */
+    --color: #fff; /* White text color */
+    --border-radius: 20px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Button shadow */
+  }
+  
+  /* Media Query for Mobile Responsiveness */
+  @media (max-width: 600px) {
+    ion-title {
+      font-size: 1.2rem; /* Smaller title font size for mobile */
+    }
+  
+    .checkout-button {
+      font-size: 0.9rem; /* Smaller button font size for mobile */
+    }
+  }
+  
