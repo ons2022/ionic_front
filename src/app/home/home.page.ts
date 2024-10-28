@@ -49,16 +49,16 @@ export class HomePage implements OnInit {
   
 
   // Add food to cart
-  addToCart(food: any) {
-    this.cart.push(food);  // Add food to cart array
-    console.log('Food added to cart:', food);
+  openCart() {
+    this.router.navigate(['/cart']); // Navigate to the cart page
   }
 
-  // Open the cart page (or modal)
-  openCart() {
-    console.log('Cart opened:', this.cart);
-    // Logic to navigate to the cart page/modal can be added here
+  addToCart(food: any) {
+    this.authService.addToCart(food, 1).then(() => {
+      console.log('Food added to cart:', food);
+    });
   }
+
 
   // Logout the user
   logout() {

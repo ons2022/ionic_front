@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';  // Assuming you use AuthService for cart logic
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -8,34 +8,33 @@ import { AuthService } from 'src/app/services/auth.service';  // Assuming you us
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage implements OnInit {
-  cartItems: any[] = [];
+  cart: any[] = [];
   totalPrice: number = 0;
 
-  constructor(private modalController: ModalController, private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {
-    this.loadCart();  // Load cart items when the modal is opened
+  async ngOnInit() {
+    await this.loadCart();
   }
 
-  // Load cart items and calculate the total price
-  loadCart() {
-    this.cartItems = this.authService.getCartItems();  // Assuming getCartItems() returns the cart items
+  async loadCart() {
+    this.cart = await this.authService.getCartItems();
     this.calculateTotalPrice();
   }
 
-  // Calculate the total price
   calculateTotalPrice() {
-    this.totalPrice = this.cartItems.reduce((total, item) => total + item.price, 0);
+    this.totalPrice = this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
   }
 
-  // Dismiss the modal
-  dismissCart() {
-    this.modalController.dismiss();
+  async removeItem(foodId: number) {
+    await this.authService.removeFromCart(foodId);
+    await this.loadCart(); // Refresh cart after removing an item
   }
 
-  // Handle checkout logic
-  checkout() {
-    console.log('Proceed to checkout');
-    // Implement the checkout process here
+  async checkout() {
+    alert('Order placed successfully!');
+    await this.authService.clearCart(); // Clear cart after checkout
+    await this.loadCart();
+    this.router.navigate(['/home']);
   }
 }

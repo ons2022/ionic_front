@@ -2,42 +2,29 @@
   <ion-toolbar>
     <ion-title>My Cart</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="dismissCart()">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
+      <ion-button (click)="checkout()">Checkout</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- List of Items in the Cart -->
-  <ion-list *ngIf="cartItems.length > 0">
-    <ion-item *ngFor="let item of cartItems">
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let item of cart">
       <ion-thumbnail slot="start">
         <ion-img [src]="item.image"></ion-img>
       </ion-thumbnail>
       <ion-label>
         <h2>{{ item.name }}</h2>
-        <p>{{ item.price | currency }}</p>
+        <p>Price: ${{ item.price }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
       </ion-label>
+      <ion-button color="danger" (click)="removeItem(item.id)">Remove</ion-button>
     </ion-item>
   </ion-list>
 
-  <!-- Total Price -->
   <ion-item>
     <ion-label>
-      <h2>Total Price:</h2>
+      <h2>Total: ${{ totalPrice }}</h2>
     </ion-label>
-    <ion-note slot="end">
-      {{ totalPrice | currency }}
-    </ion-note>
   </ion-item>
-
-  <!-- Empty Cart Message -->
-  <ion-item *ngIf="cartItems.length === 0">
-    <ion-label>Your cart is empty.</ion-label>
-  </ion-item>
-
-  <!-- Checkout Button -->
-  <ion-button expand="full" (click)="checkout()" [disabled]="cartItems.length === 0">Checkout</ion-button>
 </ion-content>
