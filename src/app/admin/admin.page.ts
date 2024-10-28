@@ -1,3 +1,4 @@
+// admin.page.ts
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
@@ -8,24 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  newFood: any = {
-    name: '',
-    description: '',
-    price: '',
-    available: true,
-    image: null
-  };
-
+  newFood: any = { name: '', description: '', price: '', available: true, image: null };
   foods: any[] = [];
+  users: any[] = [];  // List of users
   editMode = false;
   editFoodId: number | null = null;
 
-  constructor(private authService: AuthService,private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.loadFoods();
+    this.loadUsers(); // Load the list of users
   }
 
+  // Load foods list
   loadFoods() {
     this.authService.getFoodList().subscribe(
       (response) => {
@@ -37,6 +34,19 @@ export class AdminPage implements OnInit {
     );
   }
 
+  // Load users list
+  loadUsers() {
+    this.authService.getAllUsers().subscribe(
+      (response) => {
+        this.users = response;
+      },
+      (error) => {
+        console.error('Failed to load user list:', error);
+      }
+    );
+  }
+
+  // File upload handling for food images
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -44,6 +54,7 @@ export class AdminPage implements OnInit {
     }
   }
 
+  // Add new food
   addFood() {
     if (!this.authService.token) {
       console.error('No authorization token found');
@@ -61,8 +72,8 @@ export class AdminPage implements OnInit {
 
     this.authService.addNewFood(formData).subscribe(
       () => {
-        this.loadFoods();  // Refresh the food list
-        this.resetForm();  // Reset the form fields after successful add
+        this.loadFoods();
+        this.resetForm();
       },
       (error) => {
         console.error('Failed to add food:', error);
@@ -70,6 +81,7 @@ export class AdminPage implements OnInit {
     );
   }
 
+  // Update existing food
   updateFood() {
     if (this.editFoodId !== null) {
       const formData = new FormData();
@@ -83,8 +95,8 @@ export class AdminPage implements OnInit {
 
       this.authService.updateFood(this.editFoodId, formData).subscribe(
         () => {
-          this.loadFoods();  // Refresh the food list
-          this.resetForm();  // Reset the form fields after successful update
+          this.loadFoods();
+          this.resetForm();
         },
         (error) => {
           console.error('Failed to update food:', error);
@@ -93,16 +105,18 @@ export class AdminPage implements OnInit {
     }
   }
 
+  // Set the selected food item to edit mode
   editFood(food: any) {
-    this.newFood = { ...food };  // Copy the selected food details into the form
+    this.newFood = { ...food };
     this.editFoodId = food.id;
     this.editMode = true;
   }
 
+  // Delete a food item
   deleteFood(foodId: number) {
     this.authService.deleteFood(foodId).subscribe(
       () => {
-        this.loadFoods();  // Refresh the food list after deletion
+        this.loadFoods();
       },
       (error) => {
         console.error('Failed to delete food:', error);
@@ -110,16 +124,29 @@ export class AdminPage implements OnInit {
     );
   }
 
-  // Method to reset the form fields
-  resetForm() {
-    this.newFood = { name: '', description: '', price: '', available: true, image: null };  // Reset all fields
-    this.editMode = false;  // Exit edit mode
-    this.editFoodId = null;  // Reset the editFoodId
+  // Delete a user (Admin only)
+  deleteUser(userId: number) {
+    this.authService.deleteUser(userId).subscribe(
+      () => {
+        this.users = this.users.filter(user => user.id !== userId);
+        console.log('User deleted successfully');
+      },
+      (error) => {
+        console.error('Failed to delete user:', error);
+      }
+    );
   }
+
+  // Reset form fields
+  resetForm() {
+    this.newFood = { name: '', description: '', price: '', available: true, image: null };
+    this.editMode = false;
+    this.editFoodId = null;
+  }
+
+  // Logout
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);  // Redirect to login page
+    this.router.navigate(['/login']);
   }
 }
-
-

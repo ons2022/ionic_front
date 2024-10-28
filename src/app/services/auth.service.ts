@@ -142,4 +142,24 @@ export class AuthService {
     console.error('An error occurred:', error);
     return throwError(() => new Error('Something went wrong; please try again later.'));
   }
+
+  getAllUsers(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`
+    });
+    return this.http.get(`${this.baseUrl}/users/`, { headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  // Delete a user by ID (Admin only)
+  deleteUser(userId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.token}`
+    });
+    return this.http.delete(`${this.baseUrl}/users/${userId}/`, { headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  
+
 }
