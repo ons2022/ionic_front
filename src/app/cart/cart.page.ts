@@ -28,12 +28,12 @@ export class CartPage implements OnInit {
 
   async removeItem(foodId: number) {
     await this.authService.removeFromCart(foodId);
-    await this.loadCart(); // Refresh cart after removing an item
+    await this.loadCart(); 
   }
 
   async checkout() {
     alert('Order placed successfully!');
-    await this.authService.clearCart(); // Clear cart after checkout
+    await this.authService.clearCart(); 
     await this.loadCart();
     this.router.navigate(['/home']);
   }

@@ -12,7 +12,7 @@ export class HomePage implements OnInit {
   cart: any[] = [];
   searchQuery: string = '';
 
-  // Example categories (static data)
+  
   categories = [
     { name: 'Pizza', image: 'assets/img/pizza.jpg' },
     { name: 'Burger', image: 'assets/img/burger.jpg' },
@@ -22,10 +22,10 @@ export class HomePage implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.loadFoodList();  // Load the food list on page load
+    this.loadFoodList();  
   }
 
-  // Load the food list from the backend
+  
   loadFoodList() {
     this.authService.getFoodList().subscribe(
       (response: any) => {
@@ -37,7 +37,7 @@ export class HomePage implements OnInit {
     );
   }
 
-  // Search food based on user input
+ 
   filteredFoods() {
     if (this.searchQuery) {
       return this.foodList.filter(food =>
@@ -48,9 +48,9 @@ export class HomePage implements OnInit {
   }
   
 
-  // Add food to cart
+  
   openCart() {
-    this.router.navigate(['/cart']); // Navigate to the cart page
+    this.router.navigate(['/cart']); 
   }
 
   addToCart(food: any) {
@@ -60,7 +60,7 @@ export class HomePage implements OnInit {
   }
 
 
-  // Logout the user
+  
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);  // Redirect to login page
