@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.page.html',
   styleUrls: ['./user-profile.page.scss'],
 })
-export class UserProfilePage implements OnInit {
+export class UserProfilePage  {
   phoneNumber: string = '';
   address: string = '';
   isSubmitted: boolean = false;
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  
 
   onValidate() {
     this.isSubmitted = true;
+  }
+  openCart() {
+    this.router.navigate(['/cart']); 
   }
 }

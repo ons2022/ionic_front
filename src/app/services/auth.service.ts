@@ -46,14 +46,21 @@ export class AuthService {
       tap(async (res: any) => {
         this.token = res.access;
         await this._storage?.set('access_token', this.token);
-        await this._storage?.set('user_role', res.role);
-      })
+        await this._storage?.set('user_role', res.role); // Ensure role is saved
+      }),
+      catchError(this.handleError) // Handle any errors
     );
   }
 
   // Retrieve the user role from storage
-  async getUserRole() {
-    return await this.storage.get('user_role');
+  async getUserRole(): Promise<string | null> {
+    return await this._storage?.get('user_role');
+  }
+
+  // Check if user is admin
+  async isAdmin(): Promise<boolean> {
+    const role = await this.getUserRole();
+    return role === 'admin'; // Return true if the user is an admin
   }
 
   // Add food item to the cart
@@ -159,7 +166,4 @@ export class AuthService {
     return this.http.delete(`${this.baseUrl}/users/${userId}/`, { headers })
       .pipe(catchError(this.handleError));
   }
-
-  
-
 }
