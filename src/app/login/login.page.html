@@ -11,11 +11,13 @@
   <div class="login-form">
     <ion-item class="styled-input">
       <ion-label position="floating">Username</ion-label>
+      <ion-icon name="person-outline" slot="start"></ion-icon>
       <ion-input [(ngModel)]="username" type="text" required></ion-input>
     </ion-item>
 
     <ion-item class="styled-input">
       <ion-label position="floating">Password</ion-label>
+      <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
       <ion-input [(ngModel)]="password" type="password" required></ion-input>
     </ion-item>
 
