@@ -15,4 +15,5 @@ export class AppComponent {
     this.authService.logout();  // Clear the auth token, and perform logout
     this.router.navigate(['/login']);  // Redirect the user to login page
   }
+  
 }

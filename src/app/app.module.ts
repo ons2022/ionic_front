@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';  // For making HTTP requests
+import { HttpClientModule } from '@angular/common/http'; 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicStorageModule } from '@ionic/storage-angular';  // Import Ionic Storage
-
+import { IonicStorageModule } from '@ionic/storage-angular';  
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,8 +14,9 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule,  // Ensure HttpClientModule is imported
-    IonicStorageModule.forRoot()  // Initialize Ionic Storage
+    HttpClientModule,  
+    IonicStorageModule.forRoot(),
+    FormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
